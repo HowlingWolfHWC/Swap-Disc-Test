@@ -34,9 +34,11 @@ end
 
 function getGameCodeOK()
 	GameCodeOK = "???"
+	System.printDebugString("Reading %s\n", "cdfs:\\SYSTEM.CNF")
 	if System.doesFileExist("cdfs:\\SYSTEM.CNF") then
 		for line in io.lines("cdfs:\\SYSTEM.CNF") do
 			if string.sub(line,1,4) == "BOOT" then
+				System.printDebugString("%s\n", line)
 				GameCodeOK = line;
 			end
 		end
@@ -78,6 +80,7 @@ function getGameCodeOK()
 	GameCodeOK = GameCodeOK:gsub(";8", "")
 	GameCodeOK = GameCodeOK:gsub(";9", "")
 	GameCodeOK = GameCodeOK:gsub(";0", "")
+	System.printDebugString("%s\n", GameCodeOK)
 	return GameCodeOK;
 end
 
