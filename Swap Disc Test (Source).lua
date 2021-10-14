@@ -19,14 +19,15 @@ else
 	imanoVideoMode="PAL"
 end
 
+infoDisco={};
+infoDisco[1]=-1;
+
 function readCDVD()
-	infoDisco={};
 	infoDisco[0]=System.checkDiscTray();
 	if infoDisco[0]==1 then
-		infoDisco[1]=-100;
+		infoDisco[1]=-1;
 		infoDisco[2]=-100;
 	else
-		infoDisco[1]=System.checkESR();
 		infoDisco[2]=System.getDiscType();
 	end
 	return infoDisco;
@@ -89,6 +90,7 @@ DiscInfoDescription = "There's no disc in the drive";
 DiscInfoLaunchable = false;
 
 function setCDVD()
+	InfoDisc[1]=System.checkESR();
 	DiscInfoName = "No media"
 	DiscInfoDescription = "There's no disc in the drive";
 	DiscInfoLaunchable = false;
@@ -159,10 +161,11 @@ function setCDVD()
 	elseif infoDisco[2]==15 then --DVDVideo
 		DiscInfoName = "DVD Video";
 		DiscInfoDescription = "Movie in DVD format";
-		if infoDisco[1] == 1 then
-			DiscInfoName = "PlayStation 2 (DVD ESR OFF)"
-			DiscInfoDescription = "You should launch this game via ESR";
-		end
+		DiscInfoLaunchable = false;
+	end
+	if InfoDisc[1] == 1 then
+		DiscInfoName = "PlayStation 2 (DVD ESR OFF)"
+		DiscInfoDescription = "You should launch this game via ESR";
 		DiscInfoLaunchable = false;
 	end
 end
@@ -172,7 +175,7 @@ oldInfoDisc = InfoDisc;
 oldInfoDisc[0] = 20000;
 if InfoDisc[0] ~= oldInfoDisc[0] then
 	setCDVD()
-elseif InfoDisc[1] ~= oldInfoDisc[1] then
+elseif InfoDisc[1] == -1 then
 	setCDVD()
 elseif InfoDisc[2] ~= oldInfoDisc[2] then
 	setCDVD()
@@ -185,7 +188,7 @@ while true do
 	InfoDisc = readCDVD()
 	if InfoDisc[0] ~= oldInfoDisc[0] then
 		setCDVD()
-	elseif InfoDisc[1] ~= oldInfoDisc[1] then
+	elseif InfoDisc[1] == -1 then
 		setCDVD()
 	elseif InfoDisc[2] ~= oldInfoDisc[2] then
 		setCDVD()
