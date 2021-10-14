@@ -86,13 +86,16 @@ DiscInfoDescription = "There's no disc in the drive";
 DiscInfoLaunchable = false;
 
 function setCDVD()
+	DiscInfoName = "No media"
+	DiscInfoDescription = "There's no disc in the drive";
+	DiscInfoLaunchable = false;
 	if infoDisco[0]==1 then
 		DiscInfoName = "No media"
 		DiscInfoDescription = "Tray is open";
 		DiscInfoLaunchable = false;
 	elseif infoDisco[2]==2 then
-		DiscInfoName = "No media"
-		DiscInfoDescription = "There's no disc in the drive";
+		DiscInfoName = "Reading disc"
+		DiscInfoDescription = "Please, wait... (SCECdDETCT)";
 		DiscInfoLaunchable = false;
 	elseif infoDisco[0]==-1 then
 		DiscInfoName = "No media";
@@ -100,15 +103,15 @@ function setCDVD()
 		DiscInfoLaunchable = false;
 	elseif infoDisco[2]==3 then
 		DiscInfoName = "Reading disc";
-		DiscInfoDescription = "Please, wait...";
+		DiscInfoDescription = "Please, wait... (SCECdDETCTCD)";
 		DiscInfoLaunchable = false;
 	elseif infoDisco[2]==4 then
 		DiscInfoName = "Reading disc";
-		DiscInfoDescription = "Please, wait...";
+		DiscInfoDescription = "Please, wait... (SCECdDETCTDVDS)";
 		DiscInfoLaunchable = false;
 	elseif infoDisco[2]==5 then
 		DiscInfoName = "Reading disc";
-		DiscInfoDescription = "Please, wait...";
+		DiscInfoDescription = "Please, wait... (SCECdDETCTDVDD)";
 		DiscInfoLaunchable = false;
 	elseif infoDisco[2]==16 then
 		DiscInfoName = "Unsupported media";
